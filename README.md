@@ -1,6 +1,7 @@
 ## Welcome to GitHub Pages
 欢迎来到我的博客，虽然啥都没有，哈哈哈
 这是通过vs code 配合 git 设置的
+红红火火
 
 You can use the [editor on GitHub](https://github.com/Saul-Gao/saul-gao.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
