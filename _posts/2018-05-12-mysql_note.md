@@ -1,11 +1,14 @@
 ---
 layout: post
-title: MySQL 笔记
+title: MySQL 数据库的常用操作 
 date: 2018-05-12
 tags: [MySQL]
 ---
 
-### 1. MySQL 数据库的安装  
+本文主要介绍 MySQL 数据库的安装、服务配置和一些常用的操作命令，系统环境为 Ubuntu 18.04  
+
+### MySQL 数据库的安装、启动和登录
+## 1. MySQL 数据库的安装  
 `sudo apt install mysql-server-5.7`  
 `sudo apt install mysql-client-5.7`  
 `sudo apt install libmysqlclient-dev`    
