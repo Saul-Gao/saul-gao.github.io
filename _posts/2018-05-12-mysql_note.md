@@ -2,12 +2,10 @@
 layout: post
 title: MySQL 笔记
 date: 2018-05-12
-tags: [MySQL, 笔记]
+tags: [MySQL]
 ---
 
-[TOC]
-# MySQL 文档 
-## 1. MySQL 数据库的安装  
+### 1. MySQL 数据库的安装  
 `sudo apt install mysql-server-5.7`  
 `sudo apt install mysql-client-5.7`  
 `sudo apt install libmysqlclient-dev`    
