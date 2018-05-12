@@ -27,4 +27,4 @@ header: 关于我
 
 <h3>致谢</h3>
 
-本博客的模板 fork 自<a href="stidio.github.io">周刚</a>，特此表示感谢！
+本博客的模板 fork 自<a href="http://stidio.github.io">周刚</a>，特此表示感谢！
