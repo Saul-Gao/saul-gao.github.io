@@ -111,7 +111,7 @@ tags: [MySQL]
 > grant 权限 on 数据库名.表名 to '用户名'@'允许连接的主机IP' identified by '密码';  
   
 设置用户权限的示例  
-> ``` SQL  
+> ``` sql  
 > -- 把 test 数据库下所有表的增删改查权限赋予给 test 用户    
 > grant insert,delete,update,select on test.* to 'test'@'localhost';  
 > -- 把所有数据库下所有表的查询权限赋予给 test 用户  
