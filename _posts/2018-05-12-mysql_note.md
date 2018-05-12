@@ -101,18 +101,29 @@ tags: [MySQL]
 > 第二种：  
 > delete from mysql.user where user = '用户名' and host = '允许连接的主机IP';  
   
-* 修改用户密码  
-`update mysql.user set password = password('新密码') where user = '用户名' and host = '允许连接的主机IP';`  
-* 设置用户权限  
-`grant 权限 on 数据库.* to '用户名'@'允许连接的主机IP';`  //需要用户存在    
-`grant 权限 on 数据库.* to '用户名'@'允许连接的主机IP' identified by '密码';` //自动创建一个用户  
-eg.  
-`grant insert,delete,update,select on test.* to 'test'@'localhost';`  
-`grant select on '.' to 'test'@'localhost';` // '.' 代表所有数据库  
-`grant all privileges on test.* to 'test'@'localhost';` //为test用户设置test数据库的所有权限  
-* 刷新权限表  
-`flush privileges;` 
-查看用户  
+修改用户密码  
+> update mysql.user set authentication_string = password('新密码') where user = '用户名' and host = '允许连接的主机IP';  
+  
+设置用户权限的两种方式  
+> 第一种：(需要先创建用户，确保用户已存在)  
+> grant 权限 on 数据库名.表名 to '用户名'@'允许连接的主机IP';  
+> 第二种：(不需要事先创建用户，执行此语句时自动创建)  
+> grant 权限 on 数据库名.表名 to '用户名'@'允许连接的主机IP' identified by '密码';  
+  
+设置用户权限的示例  
+> ``` SQL  
+> -- 把 test 数据库下所有表的增删改查权限赋予给 test 用户    
+> grant insert,delete,update,select on test.* to 'test'@'localhost';  
+> -- 把所有数据库下所有表的查询权限赋予给 test 用户  
+> grant select on '.' to 'test'@'localhost';    
+> -- 把 test 数据库下所有表的所有权限赋予给 test 用户  
+> grant all privileges on test.* to 'test'@'localhost';  
+> ```  
+    
+刷新权限表 (每次修改权限后必须刷新权限表使之生效)  
+> flush privileges; 
+  
+查看所有用户  
 > select host,user from mysql.user;  
   
 <br /> 
