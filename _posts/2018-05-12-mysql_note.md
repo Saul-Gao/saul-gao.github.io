@@ -10,6 +10,7 @@ tags: [MySQL]
 ### MySQL 数据库的安装、启动和登录
 
 #### 1. MySQL 数据库的安装  
+  
 安装 MySQL 数据库的客户端  
 > sudo apt install mysql-client-5.7 
   
@@ -21,10 +22,21 @@ tags: [MySQL]
   
 因为服务端中包含了客户端的安装，所以安装客户端也可以省略  
 
-## 2. MySQL 服务的启动和停止  
-`service start mysql;`  
-`service stop mysql;`
-## 3. MySQL 数据库的登录和退出  
+#### 2. MySQL 服务的启动、停止和状态  
+
+启动 MySQL 服务  
+> service mysql start  
+  
+停止 MySQL 服务  
+> service mysql stop  
+  
+重启 MySQL 服务  
+> service mysql restart  
+  
+查看 MySQL 状态  
+> service mysql status  
+
+#### 3. MySQL 数据库的登录和退出  
 `mysql -u用户名 -p密码`  
 eg. `mysql -uroot -p205205`  
 `exit`  
