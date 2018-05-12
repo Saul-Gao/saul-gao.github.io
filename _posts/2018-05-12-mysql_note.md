@@ -1,3 +1,10 @@
+---
+layout: post
+title: MySQL 笔记
+date: 2018-05-12
+tags: [MySQL, 笔记]
+---
+
 [TOC]
 # MySQL 文档 
 ## 1. MySQL 数据库的安装  
