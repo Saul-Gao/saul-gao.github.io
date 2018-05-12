@@ -1,24 +1,24 @@
 # Basic
-title: 周刚
-subtitle: Nicolas Chow
-description: 凡是过去 皆为序章
+title: 高帅
+subtitle: Saul Gao
+description: 好好学习 天天向上 
 # 头像里面的标题
-avatarTitle: stidio
+avatarTitle: fighting 
 # 头像里面的描述
-avatarDesc: 编程·管理·运动·读书
-url: "http://stidio.github.io"
+avatarDesc: 编程·读书·健身·游戏
+url: "http://saul-gao.github.io"
 
 # Comment
 comment:
     # disqus: leopard
-    duoshuo: stidio 
+    duoshuo: saul-gao
 
 # Social
 social:
-    weibo: 1073227497 
-    github: stidio
+    weibo: muyou
+    github: saul-gao
     # twitter: 
-    mail: stidio@163.com
+    mail: 761999167@qq.com
 
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 
