@@ -82,20 +82,25 @@ tags: [MySQL]
 > 第一种：  
 > create user '用户名'@'允许连接的主机IP' identified by '密码';  
 > 第二种：  
-insert into mysql.user(Host,User,Authentication_string) values('允许连接的主机IP','用户名','密码');  
+> insert into mysql.user(Host,User,Authentication_string) values('允许连接的主机IP','用户名','密码');  
+> Authentication_string 仅在 5.7 版本后有效，以前的版本使用 password 替代  
   
 创建用户的示例
 > ``` sql  
 > -- 创建 test 用户，密码为 test，限定该用户名只能在本地访问数据库
 > create user 'test'@'127.0.0.1' identified by 'test';
 > create user 'test'@'localhost' identified by 'test';  
-> insert into mysql.user(host,user,password) values('localhost','test','test');  
+> insert into mysql.user(host,user,authentication_string) values('localhost','test','test');  
 > -- 创建 test 用户，密码为 test，% 代表可在任意 IP 地址使用该用户名访问数据库
 > create user 'test'@'%' identified by 'test';
-> ```
-* 删除用户  
-`drop user '用户名'@'允许连接的主机IP';`  
-`delete from mysql.user where user = '用户名' and host = '允许连接的主机IP';`  
+> ```  
+  
+删除用户的两种方式  
+> 第一种：  
+> drop user '用户名'@'允许连接的主机IP';  
+> 第二种：  
+> delete from mysql.user where user = '用户名' and host = '允许连接的主机IP';  
+  
 * 修改用户密码  
 `update mysql.user set password = password('新密码') where user = '用户名' and host = '允许连接的主机IP';`  
 * 设置用户权限  
