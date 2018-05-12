@@ -76,18 +76,23 @@ tags: [MySQL]
 > show create database 数据库名;  
   
 <br />
-### 5. 对用户的操作  
+### 对用户的操作  
   
-* 查看用户  
-`select host,user from mysql.user;`  
-* 创建用户  
-`create user '用户名'@'允许连接的主机IP' identified by '密码';`  
-`insert into mysql.user(Host,User,Password) values('允许连接的主机IP','用户名','密码');`  
-eg.  
-`create user 'test'@'%' identified by 'test';`  
-`create user 'test'@'127.0.0.1' identified by 'test';`  
-`create user 'test'@'localhost' identified by 'test';`  
-`insert into mysql.user(host,user,password) values('localhost','test','test');`  
+创建用户的两种方式  
+> 第一种：
+> create user '用户名'@'允许连接的主机IP' identified by '密码';  
+> 第二种：
+insert into mysql.user(Host,User,Authentication_string) values('允许连接的主机IP','用户名','密码');  
+  
+创建用户的示例
+> ``` sql  
+> -- 创建 test 用户，密码为 test，限定该用户名只能在本地访问数据库
+> create user 'test'@'127.0.0.1' identified by 'test';
+> create user 'test'@'localhost' identified by 'test';  
+> insert into mysql.user(host,user,password) values('localhost','test','test');  
+> -- 创建 test 用户，密码为 test，% 代表可在任意 IP 地址使用该用户名访问数据库
+> create user 'test'@'%' identified by 'test';
+> ```
 * 删除用户  
 `drop user '用户名'@'允许连接的主机IP';`  
 `delete from mysql.user where user = '用户名' and host = '允许连接的主机IP';`  
@@ -101,8 +106,12 @@ eg.
 `grant select on '.' to 'test'@'localhost';` // '.' 代表所有数据库  
 `grant all privileges on test.* to 'test'@'localhost';` //为test用户设置test数据库的所有权限  
 * 刷新权限表  
-`flush privileges;`  
-## 6. 对数据表的操作  
+`flush privileges;` 
+查看用户  
+> select host,user from mysql.user;  
+  
+<br /> 
+### 对数据表的操作  
 * 创建数据表  
 `create table 表名(字段名 字段类型，字段名 字段类型，...);`  
 `create table 表名(字段名 字段类型，字段名 字段类型，...) character set utf8;`
