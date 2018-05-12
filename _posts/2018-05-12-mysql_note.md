@@ -44,7 +44,8 @@ tags: [MySQL]
   
 退出 MySQL  
 > exit  
-<br />
+  
+  
 ### 对数据库的操作  
   
 创建数据库 (默认字符集是拉丁文，不支持中文)  
@@ -74,7 +75,7 @@ tags: [MySQL]
 查看创建数据库时的语句  
 > show create database 数据库名;  
   
-#### 5. 对用户的操作  
+### 5. 对用户的操作  
   
 * 查看用户  
 `select host,user from mysql.user;`  
