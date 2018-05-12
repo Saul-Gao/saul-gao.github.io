@@ -8,10 +8,13 @@ tags: [MySQL]
 本文主要介绍 MySQL 数据库的安装、服务配置和一些常用的操作命令，系统环境为 Ubuntu 18.04  
 
 ### MySQL 数据库的安装、启动和登录
-## 1. MySQL 数据库的安装  
-`sudo apt install mysql-server-5.7`  
-`sudo apt install mysql-client-5.7`  
-`sudo apt install libmysqlclient-dev`    
+#### 1. MySQL 数据库的安装  
+安装 MySQL 数据库的客户端
+> `sudo apt install mysql-client-5.7`  
+安装 MySQL 数据库的服务端
+> `sudo apt install mysql-server-5.7`  
+安装 MySQL 数据库的 C 语言开发库
+> `sudo apt install libmysqlclient-dev`    
 ## 2. MySQL 服务的启动和停止  
 `service start mysql;`  
 `service stop mysql;`
