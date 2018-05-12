@@ -45,21 +45,34 @@ tags: [MySQL]
 退出 MySQL  
 > exit  
   
-### 对数据库的操作
-* 查看数据库  
-`show databases;`  
-`show create database 数据库名;` //查看创建数据库时的语句
-* 创建数据库  
-`create database 数据库名;`  //默认字符集是latin1(拉丁文，不支持中文)  
-`create database 数据库名 character set utf8;` //创建一个数据库指定为utf8字符集  
-* 删除数据库  
-`drop database 数据库名;`  
-* 查看当前数据库  
-`select database();`
-* 切换数据库  
-`use 数据库名;`  
-* 修改数据库的字符集  
-`alter database 数据库名 character set utf8;`
+### 对数据库的操作  
+  
+创建数据库 (默认字符集是拉丁文，不支持中文)  
+> create database 数据库名;    
+  
+创建数据库 (指定字符集）  
+> create database 数据库名 character set utf8;  
+删除数据库  
+> drop database 数据库名;  
+
+修改数据库的字符集  
+> alter database 数据库名 character set utf8;  
+
+修改数据库名称  
+> mysql 不支持直接修改数据库名，可以创建一个新数据库，把旧数据库中的内容导入的新数据库中，再删除旧数据库;导入导出数据的方法在本文档最后  
+
+查看当前使用的数据库  
+> select database();  
+
+查看所有数据库  
+> show databases;  
+  
+切换数据库  
+> use 数据库名;  
+
+查看创建数据库时的语句  
+> show create database 数据库名;  
+  
 ## 5. 对用户的操作  
 * 查看用户  
 `select host,user from mysql.user;`  
