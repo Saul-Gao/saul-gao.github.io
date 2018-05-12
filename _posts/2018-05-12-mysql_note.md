@@ -45,7 +45,6 @@ tags: [MySQL]
 退出 MySQL  
 > exit  
   
-<br />  
 ### 对数据库的操作
 * 查看数据库  
 `show databases;`  
