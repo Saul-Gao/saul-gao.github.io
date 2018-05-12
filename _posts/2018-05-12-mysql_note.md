@@ -37,10 +37,15 @@ tags: [MySQL]
 > service mysql status  
 
 #### 3. MySQL 数据库的登录和退出  
-`mysql -u用户名 -p密码`  
-eg. `mysql -uroot -p205205`  
-`exit`  
-## 4. 对数据库的操作
+  
+登录 MySQL 的两种方式  
+> mysql -u用户名 -p密码 // 这种方式会暴露明文密码  
+> mysql -u用户名 -p 回车后再输入密码 // 密文的密码  
+  
+退出 MySQL  
+> exit  
+  
+### 对数据库的操作
 * 查看数据库  
 `show databases;`  
 `show create database 数据库名;` //查看创建数据库时的语句
