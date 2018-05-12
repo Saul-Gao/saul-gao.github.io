@@ -79,9 +79,9 @@ tags: [MySQL]
 ### 对用户的操作  
   
 创建用户的两种方式  
-> 第一种：
+> 第一种：  
 > create user '用户名'@'允许连接的主机IP' identified by '密码';  
-> 第二种：
+> 第二种：  
 insert into mysql.user(Host,User,Authentication_string) values('允许连接的主机IP','用户名','密码');  
   
 创建用户的示例
