@@ -167,29 +167,35 @@ tags: [MySQL]
 
 <br />
 ### 数据类型  
-* 整数类型  
-`tinyint    1字节`  
-`smallint   2字节`  
-`int或integer    4字节`  
-`bigint     8字节`  
-`float(m,n)      4字节`  //不指定m,n有可能无法通过where条件查询  
-`double     8字节`  
-`decimal(m,d)   m>d?m+2:d+2     m代表数据的宽度，d代表小数宽度`   
-* 字符串类型  
-`char   定长字符串`  
-`varchar    变长字符串`  
-`text   长文本数据`  
-`blob   二进制长文本数据`  
-* 日期和时间类型  
-`date   4字节 yyyy-mm-dd  日期`  
-`time   3字节 hh:mm:ss    时间`  
-`year   1字节 yyyy        年份`  
-`datetime   8字节 yyyy-mm-dd hh:mm:ss 混合日期时间`  
-`timestamp  4字节 yyyy-mm-dd hh:mm:ss 混合日期时间 如果未明确赋值或赋值为null,则自动使用当前系统时间`  
-* 复合类型  
-`enum   只能使用集合中的一个值或null`  
-`set    只能使用集合中的多个值或null`  
-## 8. 对数据的操作  
+  
+整数类型  
+> tinyint    1字节  
+> smallint   2字节  
+> int或integer    4字节  
+> bigint     8字节  
+> float(m,n)      4字节  //不指定m,n有可能无法通过where条件查询  
+> double     8字节  
+> decimal(m,d)   m>d?m+2:d+2     m代表数据的宽度，d代表小数宽度  
+  
+字符串类型  
+> char   定长字符串  
+> varchar(n)    变长字符串，n为最大长度  
+> text   长文本数据  
+> blob   二进制长文本数据  
+  
+日期和时间类型  
+> date   4字节 yyyy-mm-dd  日期  
+> time   3字节 hh:mm:ss    时间  
+> year   1字节 yyyy        年份  
+> datetime   8字节 yyyy-mm-dd hh:mm:ss 混合日期时间  
+> timestamp  4字节 yyyy-mm-dd hh:mm:ss 混合日期时间 默认值为当前系统时间，可以指定该字段值是否随着记录更新而更新  
+  
+复合类型  
+> enum   只能使用集合中的一个值或null  
+> set    只能使用集合中的多个值或null  
+
+<br />
+### 对数据的操作  
 * 插入数据  
 `insert into 表名(字段名，字段名，...) values(字段值，字段值，...);` //如果为所有字段插入数据可以不指定字段名  
 * 删除数据  
