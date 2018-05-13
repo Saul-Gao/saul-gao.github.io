@@ -302,7 +302,7 @@ tags: [MySQL]
     > select * from 表1 full outer join 表2 on 连接条件 where 查询条件; //outer 可省略  
     //可以通过左外连接和右外连接的联合查询来实现  
     > select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;  
-    
+   
 16. 常用字符串函数  
     * upper 和 ucase  
     //把所有字符转换为大写字母  
