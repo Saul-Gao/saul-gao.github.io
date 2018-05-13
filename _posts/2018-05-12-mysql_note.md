@@ -278,30 +278,31 @@ tags: [MySQL]
     * 子查询通常只用于返回单个字段的结果集，如果需要匹配多个字段，可以使用多表联查;   
   
 15. 多表联查  
-    * 数据表的别名  
-    `select * from 表名 as 别名;` // as 可省略  
-    * 交叉连接(笛卡尔积)  
-    //显示两张表的乘积  
-    `select * from 表1 cross join 表2 on 连接条件 where 查询条件;` //cross join on 可省略  
-    `select * from 表1,表2 where 查询条件;` //默认就是交叉连接  
-    * 内连接  
-    //显示两张表的交集  
-    `select * from 表1 inner join 表2 on 连接条件 where 查询条件;` //inner 可省略  
-    * 左外连接  
-    //左表显示全集,右表显示交集  
-    `select * from 表1 left outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
-    * 右外连接  
-    //左表显示交集,右表显示全集  
-    `select * from 表1 right outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
-    * 联合查询  
-    //显示两张表的并集,要求两张表的查询字段名必须保持一致  
-    `select id,name from 表1 union select id,name from 表2;` 
-    * 全外连接(MySQL不支持)  
-    //显示两张表的并集  
-    `select * from 表1 full outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
+  
+    数据表的别名  
+    > select * from 表名 as 别名; // as 可省略  
+
+    交叉连接(笛卡尔积，显示两张表的乘积)    
+    > select * from 表1 cross join 表2 on 连接条件 where 查询条件; //cross join on 可省略  
+    > select * from 表1,表2 where 查询条件; //默认就是交叉连接  
+
+    内连接(显示两张表的交集)  
+    > select * from 表1 inner join 表2 on 连接条件 where 查询条件; //inner 可省略  
+
+    左外连接(左表显示全集,右表显示交集)  
+    > select * from 表1 left outer join 表2 on 连接条件 where 查询条件; //outer 可省略  
+
+    右外连接(左表显示交集,右表显示全集)  
+    > select * from 表1 right outer join 表2 on 连接条件 where 查询条件; //outer 可省略  
+
+    联合查询(显示两张表的并集,要求两张表的查询字段名必须保持一致)  
+    > select id,name from 表1 union select id,name from 表2;  
+
+    全外连接(MySQL不支持，显示两张表的并集)  
+    > select * from 表1 full outer join 表2 on 连接条件 where 查询条件; //outer 可省略  
     //可以通过左外连接和右外连接的联合查询来实现  
-    `select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;`  
-    *  *  *  
+    > select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;  
+    
 16. 常用字符串函数  
     * upper 和 ucase  
     //把所有字符转换为大写字母  
