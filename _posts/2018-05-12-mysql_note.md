@@ -196,228 +196,242 @@ tags: [MySQL]
 
 <br />
 ### 对数据的操作  
-* 插入数据  
-`insert into 表名(字段名，字段名，...) values(字段值，字段值，...);` //如果为所有字段插入数据可以不指定字段名  
-* 删除数据  
-`delete from 表名;` //删除表中所有数据  
-`delete from 表名 where 字段名 = ?;` //根据条件删除  
-`truncate 表名;` //这种方式效率高  
-* 修改数据  
-`update 表名 set 字段名 = ?;` //修改单个字段  
-`update 表名 set 字段名 = ?,字段名=?;` //修改多个字段  
-`update 表名 set 字段名 = ? where 字段名 = ?;` //根据条件修改  
-* 查询数据  
-    1. 查询所有数据  
-    `select * from 表名;`   
-    2. 查询指定字段  
-    `select 字段名,字段名 from 表名;`   
-    3. 根据条件查询  
-    `select 字段名 from 表名 where 字段名 = ?;`   
-    *  *  *
-    4. 字段别名  
-    `select 字段名 as 别名 from 表名;` //as 可以省略  
-    5. 去掉重复数据  
-    `select distinct 字段名 from 表名;` //当指定多个字段时，多个字段必须全部匹配才会成功    
-    6. 滤空修正  
-    `select ifnull(字段名,替换值) from 表名;`
-    7. 使用算术表达式  
-    `select 字段名 + 字段名 as '别名' from 表名;`  
-    8. 字符串拼接  
-    `select concat(str1,str2,...) as '别名' from 表名;`  
-    9. 常用函数 min,max,avg,count  
-    `select min(字段名) from 表名;`  
+  
+插入数据  
+> insert into 表名(字段名，字段名，...) values(字段值，字段值，...); //如果为所有字段插入数据可以不指定字段名  
+  
+删除数据  
+> delete from 表名; //删除表中所有数据  
+> delete from 表名 where 字段名 = ?; //根据条件删除  
+> truncate 表名; //删除表中所有数据，这种方式效率高  
+  
+修改数据  
+> update 表名 set 字段名 = ?; //修改单个字段  
+> update 表名 set 字段名 = ?,字段名=?; //修改多个字段  
+> update 表名 set 字段名 = ? where 字段名 = ?; //根据条件修改  
+  
+查询数据  
+  
+1. 查询所有数据  
+> select * from 表名;   
+  
+2. 查询指定字段  
+> select 字段名,字段名 from 表名;  
+  
+3. 根据条件查询  
+> select 字段名 from 表名 where 字段名 = ?;  
+  
+4. 字段别名  
+> select 字段名 as 别名 from 表名; //as 可以省略  
+  
+5. 去掉重复数据  
+> select distinct 字段名 from 表名; //当指定多个字段时，多个字段必须全部匹配才会成功  
+    
+6. 滤空修正  
+> select ifnull(字段名,替换值) from 表名;  
+  
+7. 使用算术表达式  
+> select 字段名 + 字段名 as '别名' from 表名;  
+  
+8. 字符串拼接  
+> select concat(str1,str2,...) as '别名' from 表名;  
+  
+9. 聚合函数 min,max,avg,count  
+> select min(字段名) from 表名;  
+  
+10. 条件查询运算符  
+> select * from 表名 where 字段名 > 3; // =,>,>=,<,<=  
+> select * from 表名 where 字段名 <> 3; // <> 不等于  
+> select * from 表名 where 字段名 between 3 and 5; //区间  
+> select * from 表名 where 字段名 is null; //空值  
+> select * from 表名 where 字段名 is not null; //非空值  
+> select * from 表名 where 字段名 = ? and 字段名 = ?; //与  
+> select * from 表名 where 字段名 = ? or 字段名 = ?; //或  
+  
+11. 模糊查询  
+> select * from 表名 where 字段名 like '%xxx'; // % 表示任意个数的任意字符  
+> select * from 表名 where 字段名 like '_xxx'; // _ 表示单个的任意字符  
+> select * from 表名 where 字段名 like '[0-9]abc'; // [] 表示单个字符的取值范围  
+> select * from 表名 where 字段名 like '[^0-9]abc';// [^] 表示单个字符的反向取值范围  
+> select * from 表名 where 字段名 like '%\%%'; // \ 表示转义,查询字段中包含%的数据  
+  
+12. 分组查询  
+`select * from 表名 where 查询条件 group by 字段名 having 查询条件;`
+13. 排序查询  
+`select * from 表名 where 查询条件 order by 字段名 asc;` // asc 表示升序排列,可省略  
+`select * from 表名 where 查询条件 order by 字段名 desc;` // desc 表示降序排列
+14. 嵌套查询  
+`select * from 表名 where 字段名 = (select 字段名 from 表名 where 字段名=?);`  
+    * 当子查询返回的值只有一个时，才可以直接使用 =,>,< 等运算符;  
+    * 当子查询返回的值是一个结果集时，需要使用 in,not in,any,some,all 等操作符;  
+    * all : 匹配结果集中的所有结果, 例如 > all 表示比所有结果都大;  
+    * any : 匹配结果信中任意一个结果, 例如 < any 表示只要比其中任意一个小就符合条件;  
+    * in : 查询的数据在子查询的结果集中,相当于 = any;  
+    * not in : 查询的数据不在子查询结果集中,相当于 <> all;  
+    * some : 匹配结果集中的部分结果，基本等同于 any,不常用;  
+    * 子查询通常只用于返回单个字段的结果集，如果需要匹配多个字段，可以使用多表联查(后面讲);   
+eg.  
+`select * from 表名 where 字段名 > all (select 字段名 from 表名);`  
+15. 多表联查  
+    * 数据表的别名  
+    `select * from 表名 as 别名;` // as 可省略  
+    * 交叉连接(笛卡尔积)  
+    //显示两张表的乘积  
+    `select * from 表1 cross join 表2 on 连接条件 where 查询条件;` //cross join on 可省略  
+    `select * from 表1,表2 where 查询条件;` //默认就是交叉连接  
+    * 内连接  
+    //显示两张表的交集  
+    `select * from 表1 inner join 表2 on 连接条件 where 查询条件;` //inner 可省略  
+    * 左外连接  
+    //左表显示全集,右表显示交集  
+    `select * from 表1 left outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
+    * 右外连接  
+    //左表显示交集,右表显示全集  
+    `select * from 表1 right outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
+    * 联合查询  
+    //显示两张表的并集,要求两张表的查询字段名必须保持一致  
+    `select id,name from 表1 union select id,name from 表2;` 
+    * 全外连接(MySQL不支持)  
+    //显示两张表的并集  
+    `select * from 表1 full outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
+    //可以通过左外连接和右外连接的联合查询来实现  
+    `select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;`  
     *  *  *  
-    10. 条件查询运算符  
-    `select * from 表名 where 字段名 > 3;` // =,>,>=,<,<=  
-    `select * from 表名 where 字段名 <> 3;` // <> 不等于  
-    `select * from 表名 where 字段名 between 3 and 5;` //区间  
-    `select * from 表名 where 字段名 is null;` //空值  
-    `select * from 表名 where 字段名 is not null;` //非空值  
-    `select * from 表名 where 字段名 = ? and 字段名 = ?;` //与  
-    `select * from 表名 where 字段名 = ? or 字段名 = ?;` //或  
-    11. 模糊查询  
-    `select * from 表名 where 字段名 like '%xxx';` // % 表示任意个数的任意字符  
-    `select * from 表名 where 字段名 like '_xxx';` // _ 表示单个的任意字符  
-    `select * from 表名 where 字段名 like '[0-9]abc';` // [] 表示单个字符的取值范围  
-    `select * from 表名 where 字段名 like '[^0-9]abc';`// [^] 表示单个字符的非取值范围  
-    `select * from 表名 where 字段名 like '%\%%';` // \ 表示转义,查询字段中包含%的数据  
-    12. 分组查询  
-    `select * from 表名 where 查询条件 group by 字段名 having 查询条件;`
-    13. 排序查询  
-    `select * from 表名 where 查询条件 order by 字段名 asc;` // asc 表示升序排列,可省略  
-    `select * from 表名 where 查询条件 order by 字段名 desc;` // desc 表示降序排列
-    14. 嵌套查询  
-    `select * from 表名 where 字段名 = (select 字段名 from 表名 where 字段名=?);`  
-        * 当子查询返回的值只有一个时，才可以直接使用 =,>,< 等运算符;  
-        * 当子查询返回的值是一个结果集时，需要使用 in,not in,any,some,all 等操作符;  
-        * all : 匹配结果集中的所有结果, 例如 > all 表示比所有结果都大;  
-        * any : 匹配结果信中任意一个结果, 例如 < any 表示只要比其中任意一个小就符合条件;  
-        * in : 查询的数据在子查询的结果集中,相当于 = any;  
-        * not in : 查询的数据不在子查询结果集中,相当于 <> all;  
-        * some : 匹配结果集中的部分结果，基本等同于 any,不常用;  
-        * 子查询通常只用于返回单个字段的结果集，如果需要匹配多个字段，可以使用多表联查(后面讲);   
-    eg.  
-    `select * from 表名 where 字段名 > all (select 字段名 from 表名);`  
-    15. 多表联查  
-        * 数据表的别名  
-        `select * from 表名 as 别名;` // as 可省略  
-        * 交叉连接(笛卡尔积)  
-        //显示两张表的乘积  
-        `select * from 表1 cross join 表2 on 连接条件 where 查询条件;` //cross join on 可省略  
-        `select * from 表1,表2 where 查询条件;` //默认就是交叉连接  
-        * 内连接  
-        //显示两张表的交集  
-        `select * from 表1 inner join 表2 on 连接条件 where 查询条件;` //inner 可省略  
-        * 左外连接  
-        //左表显示全集,右表显示交集  
-        `select * from 表1 left outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
-        * 右外连接  
-        //左表显示交集,右表显示全集  
-        `select * from 表1 right outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
-        * 联合查询  
-        //显示两张表的并集,要求两张表的查询字段名必须保持一致  
-        `select id,name from 表1 union select id,name from 表2;` 
-        * 全外连接(MySQL不支持)  
-        //显示两张表的并集  
-        `select * from 表1 full outer join 表2 on 连接条件 where 查询条件;` //outer 可省略  
-        //可以通过左外连接和右外连接的联合查询来实现  
-        `select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;`  
-        *  *  *  
-    16. 常用字符串函数  
-        * upper 和 ucase  
-        //把所有字符转换为大写字母  
-        `select upper(name) from 表名;`  
-        * lower 和 lcase  
-        //把所有字符转换为小写字母  
-        `select lcase(name) from 表名;`  
-        * replace(str, from_str, to_str)  
-        //把str中的from_str替换为to_str  
-        `select replace(字段名,替换前的值,替换后的值) from 表名;`  
-        * repeat(str,count)  
-        //返回str重复count次的字符串  
-        `select repeat('abc',2) from 表名;` // abcabc  
-        * reverse(str)  
-        //逆序字符串  
-        `select reverse('abc') from 表名;` // cba  
-        * insert(str,pos,len,newstr)  
-        //把str中pos位置开始长度为len的字符串替换为newstr  
-        `select insert('abcdef',2,3,'hhh');` // ahhhef  
-        * substring(str from pos)  
-        //从str中的pos位置开始返回一个新字符串
-        `select substring('abcdef',3);` // cdef  
-        * substring_index(str,delim,count)  
-        //返回str中第count次出现的delim之前的所有字符,如果count为负数,则从右向左  
-        `select substring_index('abacadae','a',3);` // abac  
-        * ltrim(str)  
-        //去除字符串左边的空格  
-        `select ltrim('  abc');`  
-        * rtrim(str)  
-        //去除字符串右边的空格  
-        `select rtrim('abc  ');`  
-        * trim(str)  
-        //去除字符串左右两边的空格  
-        `select trim('   abc   ');`  
-        * mid(str,pos,len)  
-        //从str中的pos位置开始返回len个长度的字符串  
-        `select mid('abcdef',2,3);` // bcd  
-        * lpad(str,len,padstr)  
-        //在str左边填充padstr直到str的长度为len  
-        `select lpad('abc',8,'de');` // dededabc  
-        * rpad(str,len,padstr)  
-        //在str右边填充padstr直到str的长度为len  
-        `select rpad('abc',8,'de');` // abcdeded  
-        * left(str,len)  
-        //返回str左边的len个字符  
-        `select left('abcd',2);` // ab  
-        * right(str,len)  
-        //返回str右边的len个字符  
-        `select right('abcd',2);` // cd  
-        * position(substr in str)  
-        //返回substr在str中第一次出现的位置  
-        `select position('c' in 'abcdc');` // 3  
-        * length(str)  
-        //返回字符串的长度  
-        `select length('abcd');` // 4  
-        * concat(str1,str2,...)  
-        //合并字符串  
-        `select concat('abc','def','gh');` // abcdefgh  
-    17. 日期时间函数  
-        * dayofweek(date)  
-        //返回date是星期几,1代表星期日,2代表星期一...  
-        `select dayofweek('2017-04-09');`  
-        * weekday(date)  
-        //返回date是星期几,0代表星期一,1代表星期二...  
-        `select weekday('2017-04-09');`  
-        * dayname(date)  
-        //返回date是星期几(按英文名返回)  
-        `select dayname('2017-04-09');`
-        * dayofmonth(date)  
-        //返回date是一个月中的第几天(范围1-31)  
-        `select dayofmonth('2017-04-09');`
-        * dayofyear(date)  
-        //返回date是一年中的第几天(范围1-366)  
-        `select dayofyear('2017-04-09');`  
-        * month(date)  
-        //返回date中的月份数值  
-        `select month('2017-04-09');`  
-        * monthname(date)  
-        //返回date是几月(按英文名返回)  
-        `select monthname('2017-04-09');`  
-        * quarter(date)  
-        //返回date是一年中的第几个季度  
-        `select quarter('2017-04-09');`  
-        * week(date,first)  
-        //返回date是一年中的第几周(first默认值是0,表示周日是一周的开始,取值为1表示周一是一周的开始)  
-        `select week('2017-04-09');`  
-        `select week('2017-04-09',1);`  
-        * year(date)  
-        //返回date的年份  
-        `select year('2017-04-09');`  
-        * hour(time)  
-        //返回time的小时数  
-        `select hour('18:06:53');`  
-        * minute(time)  
-        //返回time的分钟数
-        `select minute('18:06:53');`  
-        * second(time)  
-        //返回time的秒数  
-        `select second('18:06:53');`  
-        * period_add(p,n)  
-        //增加n个月到时期p并返回(p的格式为yymm或yyyymm)  
-        `select period_add(201702,2);`  
-        * period_diff(p1,p2)  
-        //返回在时期p1和p2之间的月数(p1,p2的格式为yymm或yyyymm)  
-        `select period_diff(201605,201704);`  
-        * date_format(date,format)  
-        //根据format字符串格式化date  
-        `select date_format('2017-04-09','%d-%m-%y');`  
-        * time_format(time,format)  
-        //根据format字符串格式化time  
-        `select time_format('12:22:33','%s-%i-%h');`  
-        * curdate() 和 current_date()  
-        //以'yyyy-mm-dd'或yyyymmdd的格式返回当前日期值  
-        `select curdate();`  
-        `select current_date();`  
-        * curtime() 和 current_time()  
-        //以'hh:mm:ss'或hhmmss格式返回当前时间值  
-        `select curtime();`  
-        `select current_date();`  
-        * now(),sysdate(),current_timestamp()  
-        //以'yyyy-mm-dd hh:mm:ss'或yyyymmddhhmmss格式返回当前日期时间 
-        `select now();`  
-        `select sysdate();`  
-        `select current_timestamp();`  
-        * unix_timestamp()  
-        //返回一个unix时间戳(从'1970-01-01 00:00:00'开始到当前时间的秒数)  
-        `select unix_timestamp();`  
-        * sec_to_time(seconds)  
-        //把秒数seconds转化为时间time  
-        `select sec_to_time(3666);`  
-        * time_to_sec(time)  
-        //把时间time转化为秒数seconds  
-        `select time_to_sec('01:01:06');`  
-    18. top N 问题  
-    `select * from 表名 limit 0,N;`  //取第0行到第N行的数据
+16. 常用字符串函数  
+    * upper 和 ucase  
+    //把所有字符转换为大写字母  
+    `select upper(name) from 表名;`  
+    * lower 和 lcase  
+    //把所有字符转换为小写字母  
+    `select lcase(name) from 表名;`  
+    * replace(str, from_str, to_str)  
+    //把str中的from_str替换为to_str  
+    `select replace(字段名,替换前的值,替换后的值) from 表名;`  
+    * repeat(str,count)  
+    //返回str重复count次的字符串  
+    `select repeat('abc',2) from 表名;` // abcabc  
+    * reverse(str)  
+    //逆序字符串  
+    `select reverse('abc') from 表名;` // cba  
+    * insert(str,pos,len,newstr)  
+    //把str中pos位置开始长度为len的字符串替换为newstr  
+    `select insert('abcdef',2,3,'hhh');` // ahhhef  
+    * substring(str from pos)  
+    //从str中的pos位置开始返回一个新字符串
+    `select substring('abcdef',3);` // cdef  
+    * substring_index(str,delim,count)  
+    //返回str中第count次出现的delim之前的所有字符,如果count为负数,则从右向左  
+    `select substring_index('abacadae','a',3);` // abac  
+    * ltrim(str)  
+    //去除字符串左边的空格  
+    `select ltrim('  abc');`  
+    * rtrim(str)  
+    //去除字符串右边的空格  
+    `select rtrim('abc  ');`  
+    * trim(str)  
+    //去除字符串左右两边的空格  
+    `select trim('   abc   ');`  
+    * mid(str,pos,len)  
+    //从str中的pos位置开始返回len个长度的字符串  
+    `select mid('abcdef',2,3);` // bcd  
+    * lpad(str,len,padstr)  
+    //在str左边填充padstr直到str的长度为len  
+    `select lpad('abc',8,'de');` // dededabc  
+    * rpad(str,len,padstr)  
+    //在str右边填充padstr直到str的长度为len  
+    `select rpad('abc',8,'de');` // abcdeded  
+    * left(str,len)  
+    //返回str左边的len个字符  
+    `select left('abcd',2);` // ab  
+    * right(str,len)  
+    //返回str右边的len个字符  
+    `select right('abcd',2);` // cd  
+    * position(substr in str)  
+    //返回substr在str中第一次出现的位置  
+    `select position('c' in 'abcdc');` // 3  
+    * length(str)  
+    //返回字符串的长度  
+    `select length('abcd');` // 4  
+    * concat(str1,str2,...)  
+    //合并字符串  
+    `select concat('abc','def','gh');` // abcdefgh  
+17. 日期时间函数  
+    * dayofweek(date)  
+    //返回date是星期几,1代表星期日,2代表星期一...  
+    `select dayofweek('2017-04-09');`  
+    * weekday(date)  
+    //返回date是星期几,0代表星期一,1代表星期二...  
+    `select weekday('2017-04-09');`  
+    * dayname(date)  
+    //返回date是星期几(按英文名返回)  
+    `select dayname('2017-04-09');`
+    * dayofmonth(date)  
+    //返回date是一个月中的第几天(范围1-31)  
+    `select dayofmonth('2017-04-09');`
+    * dayofyear(date)  
+    //返回date是一年中的第几天(范围1-366)  
+    `select dayofyear('2017-04-09');`  
+    * month(date)  
+    //返回date中的月份数值  
+    `select month('2017-04-09');`  
+    * monthname(date)  
+    //返回date是几月(按英文名返回)  
+    `select monthname('2017-04-09');`  
+    * quarter(date)  
+    //返回date是一年中的第几个季度  
+    `select quarter('2017-04-09');`  
+    * week(date,first)  
+    //返回date是一年中的第几周(first默认值是0,表示周日是一周的开始,取值为1表示周一是一周的开始)  
+    `select week('2017-04-09');`  
+    `select week('2017-04-09',1);`  
+    * year(date)  
+    //返回date的年份  
+    `select year('2017-04-09');`  
+    * hour(time)  
+    //返回time的小时数  
+    `select hour('18:06:53');`  
+    * minute(time)  
+    //返回time的分钟数
+    `select minute('18:06:53');`  
+    * second(time)  
+    //返回time的秒数  
+    `select second('18:06:53');`  
+    * period_add(p,n)  
+    //增加n个月到时期p并返回(p的格式为yymm或yyyymm)  
+    `select period_add(201702,2);`  
+    * period_diff(p1,p2)  
+    //返回在时期p1和p2之间的月数(p1,p2的格式为yymm或yyyymm)  
+    `select period_diff(201605,201704);`  
+    * date_format(date,format)  
+    //根据format字符串格式化date  
+    `select date_format('2017-04-09','%d-%m-%y');`  
+    * time_format(time,format)  
+    //根据format字符串格式化time  
+    `select time_format('12:22:33','%s-%i-%h');`  
+    * curdate() 和 current_date()  
+    //以'yyyy-mm-dd'或yyyymmdd的格式返回当前日期值  
+    `select curdate();`  
+    `select current_date();`  
+    * curtime() 和 current_time()  
+    //以'hh:mm:ss'或hhmmss格式返回当前时间值  
+    `select curtime();`  
+    `select current_date();`  
+    * now(),sysdate(),current_timestamp()  
+    //以'yyyy-mm-dd hh:mm:ss'或yyyymmddhhmmss格式返回当前日期时间 
+    `select now();`  
+    `select sysdate();`  
+    `select current_timestamp();`  
+    * unix_timestamp()  
+    //返回一个unix时间戳(从'1970-01-01 00:00:00'开始到当前时间的秒数)  
+    `select unix_timestamp();`  
+    * sec_to_time(seconds)  
+    //把秒数seconds转化为时间time  
+    `select sec_to_time(3666);`  
+    * time_to_sec(time)  
+    //把时间time转化为秒数seconds  
+    `select time_to_sec('01:01:06');`  
+18. top N 问题  
+`select * from 表名 limit 0,N;`  //取第0行到第N行的数据
 ## 9. 索引  
 * 普通索引   
 `create index 索引名 on 表名(字段名(索引长度));`  
