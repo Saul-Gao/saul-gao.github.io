@@ -128,32 +128,45 @@ tags: [MySQL]
   
 <br /> 
 ### 对数据表的操作  
-* 创建数据表  
-`create table 表名(字段名 字段类型，字段名 字段类型，...);`  
-`create table 表名(字段名 字段类型，字段名 字段类型，...) character set utf8;`
-* 删除数据表  
-`drop table 表名;`  
-* 修改数据表  
-    1. 修改表名:  
-    `rename table 原表名 to 新表名;`  
-    2. 增加字段:  
-    `alter table 表名 add column 字段名 字段类型;` //column 可省略  
-    3. 修改字段类型:  
-    `alter table 表名 modify column 字段名 新字段类型;`  
-    4. 修改字段名和字段类型:  
-    `alter table 表名 change column 原字段名 新字段名 新字段类型;`  
-    5. 删除字段:  
-    `alter table 表名 drop column 字段名;`  
-    6. 修改表的字符集  
-    `alter table 表名 character set utf8;`
-* 显示数据库中的表  
-`show tables;`  
-* 显示数据表的结构  
-`desc 表名;`  
-`describe 表名;`  
-* 查看创建表时的语句  
-`show create table 表名;`
-## 7. 数据类型  
+  
+创建数据表  
+> create table 表名(字段名 字段类型，字段名 字段类型，...);  
+> create table 表名(字段名 字段类型，字段名 字段类型，...) character set utf8;  
+  
+删除数据表  
+> drop table 表名;  
+  
+修改数据表  
+1. 修改表名  
+> rename table 原表名 to 新表名;  
+
+2. 增加字段  
+> alter table 表名 add column 字段名 字段类型; //column 可省略  
+
+3. 修改字段类型  
+> alter table 表名 modify column 字段名 新字段类型;  
+
+4. 修改字段名和字段类型  
+> alter table 表名 change column 原字段名 新字段名 新字段类型;  
+
+5. 删除字段  
+> alter table 表名 drop column 字段名;  
+
+6. 修改表的字符集  
+> alter table 表名 character set utf8;  
+  
+显示数据库中的表  
+> show tables;  
+  
+显示数据表的结构  
+> desc 表名;  
+> describe 表名;  
+  
+查看创建表时的语句  
+> show create table 表名;  
+
+<br />
+### 数据类型  
 * 整数类型  
 `tinyint    1字节`  
 `smallint   2字节`  
