@@ -256,22 +256,27 @@ tags: [MySQL]
 > select * from 表名 where 字段名 like '%\%%'; // \ 表示转义,查询字段中包含%的数据  
   
 12. 分组查询  
-`select * from 表名 where 查询条件 group by 字段名 having 查询条件;`
+> select * from 表名 where 查询条件 group by 字段名 having 查询条件;  
+  
 13. 排序查询  
-`select * from 表名 where 查询条件 order by 字段名 asc;` // asc 表示升序排列,可省略  
-`select * from 表名 where 查询条件 order by 字段名 desc;` // desc 表示降序排列
+> select * from 表名 where 查询条件 order by 字段名 asc; // asc 表示升序排列,可省略  
+> select * from 表名 where 查询条件 order by 字段名 desc; // desc 表示降序排列  
+  
 14. 嵌套查询  
-`select * from 表名 where 字段名 = (select 字段名 from 表名 where 字段名=?);`  
-    * 当子查询返回的值只有一个时，才可以直接使用 =,>,< 等运算符;  
-    * 当子查询返回的值是一个结果集时，需要使用 in,not in,any,some,all 等操作符;  
-    * all : 匹配结果集中的所有结果, 例如 > all 表示比所有结果都大;  
-    * any : 匹配结果信中任意一个结果, 例如 < any 表示只要比其中任意一个小就符合条件;  
-    * in : 查询的数据在子查询的结果集中,相当于 = any;  
-    * not in : 查询的数据不在子查询结果集中,相当于 <> all;  
-    * some : 匹配结果集中的部分结果，基本等同于 any,不常用;  
-    * 子查询通常只用于返回单个字段的结果集，如果需要匹配多个字段，可以使用多表联查(后面讲);   
-eg.  
-`select * from 表名 where 字段名 > all (select 字段名 from 表名);`  
+> select * from 表名 where 字段名 = (select 字段名 from 表名 where 字段名=?);  
+
+示例：  
+> select * from 表名 where 字段名 > all (select 字段名 from 表名);  
+
+* 当子查询返回的值只有一个时，才可以直接使用 =,>,< 等运算符;  
+* 当子查询返回的值是一个结果集时，需要使用 in,not in,any,some,all 等操作符;  
+* all : 匹配结果集中的所有结果, 例如 > all 表示比所有结果都大;  
+* any : 匹配结果信中任意一个结果, 例如 < any 表示只要比其中任意一个小就符合条件;  
+* in : 查询的数据在子查询的结果集中,相当于 = any;  
+* not in : 查询的数据不在子查询结果集中,相当于 <> all;  
+* some : 匹配结果集中的部分结果，基本等同于 any,不常用;  
+* 子查询通常只用于返回单个字段的结果集，如果需要匹配多个字段，可以使用多表联查;   
+  
 15. 多表联查  
     * 数据表的别名  
     `select * from 表名 as 别名;` // as 可省略  
