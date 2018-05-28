@@ -24,7 +24,7 @@ tags: [MySQL]
 
 #### 2. MySQL 服务的启动、停止和状态  
 
-启动 MySQL 服务  
+启动 MySQL 服务   
 > service mysql start  
   
 停止 MySQL 服务  
@@ -303,13 +303,15 @@ tags: [MySQL]
     //可以通过左外连接和右外连接的联合查询来实现  
     > select * from 表1 left join 表2 on 连接条件 where 查询条件 union select * from 表1 right join 表2 on 连接条件 where 查询条件;  
    
-16. 常用字符串函数  
-    * upper 和 ucase  
-    //把所有字符转换为大写字母  
-    `select upper(name) from 表名;`  
-    * lower 和 lcase  
-    //把所有字符转换为小写字母  
-    `select lcase(name) from 表名;`  
+16. 常用字符串函数    
+    把所有字符转换为大写字母 
+    > upper 和 ucase 
+    > select upper(name) from 表名;  
+
+    把所有字符转换为小写字母  
+    > lower 和 lcase  
+    > select lcase(name) from 表名;`  
+     
     * replace(str, from_str, to_str)  
     //把str中的from_str替换为to_str  
     `select replace(字段名,替换前的值,替换后的值) from 表名;`  
