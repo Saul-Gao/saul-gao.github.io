@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL 数据库的常用操作 
+title: MySQL 数据库的基础命令整理 
 date: 2018-05-12
 tags: [MySQL]
 ---
