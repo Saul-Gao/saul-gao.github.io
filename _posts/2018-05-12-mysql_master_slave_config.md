@@ -2,11 +2,10 @@
 layout: post
 title: MySQL 主从配置
 date: 2018-05-12
-tags: [MySQL, 笔记]
+tags: [MySQL]
 ---
 
-## MySql 主从配置
-* 主服务器配置
+### 主服务器配置
 1. 修改配置文件 mysql.cnf
 ```
 [mysqld]
@@ -22,7 +21,7 @@ flush privileges;
 3. 查看 master 状态，记录文件名和位置
 `show master status;`
 
-* 从服务器配置
+### 从服务器配置
 1. 修改配置文件 mysql.cnf
 `server-id=2`
 2. 重启 mysql，执行同步 sql 语句
