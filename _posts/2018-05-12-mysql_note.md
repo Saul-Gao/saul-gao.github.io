@@ -534,7 +534,7 @@ tags: [MySQL]
 ### 触发器  
 > create trigger 触发器名  
 > {before|after}  
-> insert|update|delete}  
+> {insert|update|delete}  
 > on 表名  
 > for each row  //行触发器,MySQL不支持语句触发器  
 > begin  
