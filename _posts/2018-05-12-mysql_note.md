@@ -379,85 +379,110 @@ tags: [MySQL]
     合并字符串  
     > concat(str1,str2,...)  
     > select concat('abc','def','gh'); // abcdefgh  
-    
+
 17. 日期时间函数  
-    * dayofweek(date)  
-    //返回date是星期几,1代表星期日,2代表星期一...  
-    `select dayofweek('2017-04-09');`  
-    * weekday(date)  
-    //返回date是星期几,0代表星期一,1代表星期二...  
-    `select weekday('2017-04-09');`  
-    * dayname(date)  
-    //返回date是星期几(按英文名返回)  
-    `select dayname('2017-04-09');`
-    * dayofmonth(date)  
-    //返回date是一个月中的第几天(范围1-31)  
-    `select dayofmonth('2017-04-09');`
-    * dayofyear(date)  
-    //返回date是一年中的第几天(范围1-366)  
-    `select dayofyear('2017-04-09');`  
-    * month(date)  
-    //返回date中的月份数值  
-    `select month('2017-04-09');`  
-    * monthname(date)  
-    //返回date是几月(按英文名返回)  
-    `select monthname('2017-04-09');`  
-    * quarter(date)  
-    //返回date是一年中的第几个季度  
-    `select quarter('2017-04-09');`  
-    * week(date,first)  
-    //返回date是一年中的第几周(first默认值是0,表示周日是一周的开始,取值为1表示周一是一周的开始)  
-    `select week('2017-04-09');`  
-    `select week('2017-04-09',1);`  
-    * year(date)  
-    //返回date的年份  
-    `select year('2017-04-09');`  
-    * hour(time)  
-    //返回time的小时数  
-    `select hour('18:06:53');`  
-    * minute(time)  
-    //返回time的分钟数
-    `select minute('18:06:53');`  
-    * second(time)  
-    //返回time的秒数  
-    `select second('18:06:53');`  
-    * period_add(p,n)  
-    //增加n个月到时期p并返回(p的格式为yymm或yyyymm)  
-    `select period_add(201702,2);`  
-    * period_diff(p1,p2)  
-    //返回在时期p1和p2之间的月数(p1,p2的格式为yymm或yyyymm)  
-    `select period_diff(201605,201704);`  
-    * date_format(date,format)  
-    //根据format字符串格式化date  
-    `select date_format('2017-04-09','%d-%m-%y');`  
-    * time_format(time,format)  
-    //根据format字符串格式化time  
-    `select time_format('12:22:33','%s-%i-%h');`  
-    * curdate() 和 current_date()  
-    //以'yyyy-mm-dd'或yyyymmdd的格式返回当前日期值  
-    `select curdate();`  
-    `select current_date();`  
-    * curtime() 和 current_time()  
-    //以'hh:mm:ss'或hhmmss格式返回当前时间值  
-    `select curtime();`  
-    `select current_date();`  
-    * now(),sysdate(),current_timestamp()  
-    //以'yyyy-mm-dd hh:mm:ss'或yyyymmddhhmmss格式返回当前日期时间 
-    `select now();`  
-    `select sysdate();`  
-    `select current_timestamp();`  
-    * unix_timestamp()  
-    //返回一个unix时间戳(从'1970-01-01 00:00:00'开始到当前时间的秒数)  
-    `select unix_timestamp();`  
-    * sec_to_time(seconds)  
-    //把秒数seconds转化为时间time  
-    `select sec_to_time(3666);`  
-    * time_to_sec(time)  
-    //把时间time转化为秒数seconds  
-    `select time_to_sec('01:01:06');`  
+    返回date是星期几,1代表星期日,2代表星期一...  
+    > dayofweek(date)  
+    > select dayofweek('2017-04-09');  
+
+    返回date是星期几,0代表星期一,1代表星期二...  
+    > weekday(date)  
+    > select weekday('2017-04-09');  
+
+    返回date是星期几(按英文名返回)  
+    > dayname(date)  
+    > select dayname('2017-04-09');  
+
+    返回date是一个月中的第几天(范围1-31)  
+    > dayofmonth(date)  
+    > select dayofmonth('2017-04-09');  
+
+    返回date是一年中的第几天(范围1-366)  
+    > dayofyear(date)  
+    > select dayofyear('2017-04-09');  
+
+    返回date中的月份数值  
+    > month(date)  
+    > select month('2017-04-09');  
+
+    返回date是几月(按英文名返回)  
+    > monthname(date)  
+    > select monthname('2017-04-09');  
+
+    返回date是一年中的第几个季度  
+    > quarter(date)  
+    > select quarter('2017-04-09');  
+
+    返回date是一年中的第几周(first默认值是0,表示周日是一周的开始,取值为1表示周一是一周的开始)  
+    > week(date,first)  
+    > select week('2017-04-09');  
+    > select week('2017-04-09',1);  
+
+    返回date的年份  
+    > year(date)  
+    > select year('2017-04-09');  
+
+    返回time的小时数  
+    > hour(time)  
+    > select hour('18:06:53');  
+
+    返回time的分钟数
+    > minute(time)  
+    > select minute('18:06:53');  
+
+    返回time的秒数  
+    > second(time)  
+    > select second('18:06:53');  
+
+    增加n个月到时期p并返回(p的格式为yymm或yyyymm)  
+    > period_add(p,n)  
+    > select period_add(201702,2);  
+
+    返回在时期p1和p2之间的月数(p1,p2的格式为yymm或yyyymm)  
+    > period_diff(p1,p2)  
+    > select period_diff(201605,201704);  
+
+    根据format字符串格式化date  
+    > date_format(date,format)  
+    > select date_format('2017-04-09','%d-%m-%y');  
+
+    根据format字符串格式化time  
+    > time_format(time,format)  
+    > select time_format('12:22:33','%s-%i-%h');  
+
+    以'yyyy-mm-dd'或yyyymmdd的格式返回当前日期值  
+    > curdate() 和 current_date()  
+    > select curdate();  
+    > select current_date();  
+
+    以'hh:mm:ss'或hhmmss格式返回当前时间值  
+    > curtime() 和 current_time()  
+    > select curtime();  
+    > select current_time();  
+
+    以'yyyy-mm-dd hh:mm:ss'或yyyymmddhhmmss格式返回当前日期时间 
+    > now(),sysdate(),current_timestamp()  
+    > select now();  
+    > select sysdate();  
+    > select current_timestamp();  
+
+    返回一个unix时间戳(从'1970-01-01 00:00:00'开始到当前时间的毫秒数)  
+    > unix_timestamp()  
+    > select unix_timestamp();  
+
+    把秒数seconds转化为时间time  
+    > sec_to_time(seconds)  
+    > select sec_to_time(3666);  
+
+    把时间time转化为秒数seconds  
+    > time_to_sec(time)  
+    > select time_to_sec('01:01:06');  
+
 18. top N 问题  
-`select * from 表名 limit 0,N;`  //取第0行到第N行的数据
-## 9. 索引  
+> 从第 M 行开始取 N 行数据  
+> select * from 表名 limit 0,N;  
+
+### 索引  
 * 普通索引   
 `create index 索引名 on 表名(字段名(索引长度));`  
 `alter table 表名 add index 索引名 on (字段名(索引长度));`  
