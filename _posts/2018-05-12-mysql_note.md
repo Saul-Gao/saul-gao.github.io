@@ -479,8 +479,8 @@ tags: [MySQL]
     > select time_to_sec('01:01:06');  
 
 18. top N 问题  
-> 从第 M 行开始取 N 行数据  
-> select * from 表名 limit 0,N;  
+> 从第 M 行开始取 N 行数据，索引 M 从 0 开始  
+> select * from 表名 limit M,N;  
 
 ### 索引  
 * 普通索引   
