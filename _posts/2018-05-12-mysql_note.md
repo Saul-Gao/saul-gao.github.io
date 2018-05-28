@@ -484,38 +484,48 @@ tags: [MySQL]
 
 ### 索引  
 * 普通索引   
-`create index 索引名 on 表名(字段名(索引长度));`  
-`alter table 表名 add index 索引名 on (字段名(索引长度));`  
-`create table 表名(字段名 字段类型,字段名 字段类型,index 索引名 (字段名(索引长度));` 
+> create index 索引名 on 表名(字段名(索引长度));  
+> alter table 表名 add index 索引名 on (字段名(索引长度));  
+> create table 表名(字段名 字段类型,字段名 字段类型,index 索引名 (字段名(索引长度));  
+
 * 唯一索引  
-`create unique index 索引名 on 表名(字段名(索引长度));`  
-`alter table 表名 add unique 索引名 on (字段名(索引长度));`  
-`create table 表名(字段名 字段类型,字段名 字段类型,unique 索引名 (字段名(索引长度));`  
+> create unique index 索引名 on 表名(字段名(索引长度));  
+> alter table 表名 add unique 索引名 on (字段名(索引长度));  
+> create table 表名(字段名 字段类型,字段名 字段类型,unique 索引名 (字段名(索引长度));  
+
 * 全文索引  
 //只支持 MyISAM 引擎  
-`create fulltext index 索引名 on 表名(字段名);`  
-`alter table 表名 add fulltext 索引名(字段名);`  
-`create table 表名(字段名 字段类型,字段名 字段类型,fulltext (字段名);`  
+> create fulltext index 索引名 on 表名(字段名);  
+> alter table 表名 add fulltext 索引名(字段名);  
+> create table 表名(字段名 字段类型,字段名 字段类型,fulltext (字段名);  
+
 * 组合索引  
-`create index 索引名 on 表名(字段名(索引长度),字段名(索引长度),...);`  
-`alter table 表名 add index 索引名 on (字段名(索引长度),字段名(索引长度),...;`  
-`create table 表名(字段名 字段类型,字段名 字段类型,index 索引名 (字段名(索引长度),字段名(索引长度));`
-## 10. 约束  
+> create index 索引名 on 表名(字段名(索引长度),字段名(索引长度),...);  
+> alter table 表名 add index 索引名 on (字段名(索引长度),字段名(索引长度),...;  
+> create table 表名(字段名 字段类型,字段名 字段类型,index 索引名 (字段名(索引长度),字段名(索引长度));  
+
+### 约束  
 * 主键约束  
-`create table 表名(字段名 字段类型 primary key,字段 字段类型,...);`  
-//一个表只能有一个主键,这个主键可以由一列或多列组成  
-`create table 表名(字段1 字段类型,字段2 字段类型,primary key(字段1,字段2);`  
+> create table 表名(字段名 字段类型 primary key,字段 字段类型,...);  
+> //一个表只能有一个主键,这个主键可以由一列或多列组成  
+> create table 表名(字段1 字段类型,字段2 字段类型,primary key(字段1,字段2);  
+
 * 唯一键约束  
-`create table 表名(字段名 字段类型 unique,字段名 字段类型,...);`  
+> create table 表名(字段名 字段类型 unique,字段名 字段类型,...);  
+
 * 外键约束  
-`create table 表1(字段名 字段类型,字段名 字段类型 references 表2(字段名),...);`  
-`create table 表1(字段1 字段类型,字段2 字段类型,foreign key(字段1) references 表2(字段名),...);`  
+> create table 表1(字段名 字段类型,字段名 字段类型 references 表2(字段名),...);  
+> create table 表1(字段1 字段类型,字段2 字段类型,foreign key(字段1) references 表2(字段名),...);  
+
 * 非空约束  
-`create table 表名(字段名 字段类型 not null,字段名 字段类型,...);`  
+> create table 表名(字段名 字段类型 not null,字段名 字段类型,...);  
+
 * 默认值约束  
-`create table 表名(字段名 字段类型 default 默认值,字段名 字段类型,...);`  
+> create table 表名(字段名 字段类型 default 默认值,字段名 字段类型,...);  
+
 * check约束(MySQL 不支持)  
-`create table 表名(字段1 字段类型,字段2 字段类型,check(字段1 > 30),...);`
+> create table 表名(字段1 字段类型,字段2 字段类型,check(字段1 > 30),...);  
+
 ## 11. 事务  
 `begin;`  
 `要执行的操作;`  
