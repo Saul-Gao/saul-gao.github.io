@@ -526,36 +526,40 @@ tags: [MySQL]
 * check约束(MySQL 不支持)  
 > create table 表名(字段1 字段类型,字段2 字段类型,check(字段1 > 30),...);  
 
-## 11. 事务  
-`begin;`  
-`要执行的操作;`  
-`commit;` 或 `rollback;`  
-## 12. 触发器  
-`create trigger 触发器名`  
-`{before|after}`  
-`insert|update|delete}`  
-`on 表名`  
-`for each row`  //行触发器,MySQL不支持语句触发器  
-`begin`  
-`触发器执行的操作`  
-`end;`
-## 13. 存储过程  
+### 事务  
+> begin;  
+> 要执行的操作;  
+> commit; 或 rollback;  
+
+### 触发器  
+> create trigger 触发器名  
+> {before|after}  
+> insert|update|delete}  
+> on 表名  
+> for each row  //行触发器,MySQL不支持语句触发器  
+> begin  
+> 触发器执行的操作  
+> end;  
+
+### 存储过程  
 * 创建存储过程  
-`create procedure 存储过程名()`  
-`{参数}`  
-`begin`  
-`要执行的操作`  
-`end;`  
+> create procedure 存储过程名()  
+> {参数}  
+> begin  
+> 要执行的操作  
+> end;  
 * 调用存储过程  
-`call 存储过程名();`  
+> call 存储过程名();  
 * 删除存储过程  
-`drop procedure 存储过程名;`
-## 14. 视图  
-`create view 视图名`  
-`as`  
-`查询的SQL语句`  
-## 15. 数据库的导入导出  
+> drop procedure 存储过程名;  
+
+### 视图  
+> create view 视图名  
+> as  
+> 查询的SQL语句  
+
+### 数据库的导入导出  
 * 导入  
-`source xxx.sql;`  
+> source xxx.sql;  
 * 导出  
-`mysqldump -u root -p 数据库名[.表名] > xxx.sql;`
+> mysqldump -u root -p 数据库名[.表名] > xxx.sql;  
