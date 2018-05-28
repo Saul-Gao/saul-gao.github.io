@@ -305,64 +305,81 @@ tags: [MySQL]
    
 16. 常用字符串函数    
     把所有字符转换为大写字母 
-    > upper 和 ucase 
+    > upper 和 ucase  
     > select upper(name) from 表名;  
 
     把所有字符转换为小写字母  
     > lower 和 lcase  
-    > select lcase(name) from 表名;`  
-     
-    * replace(str, from_str, to_str)  
-    //把str中的from_str替换为to_str  
-    `select replace(字段名,替换前的值,替换后的值) from 表名;`  
-    * repeat(str,count)  
-    //返回str重复count次的字符串  
-    `select repeat('abc',2) from 表名;` // abcabc  
-    * reverse(str)  
-    //逆序字符串  
-    `select reverse('abc') from 表名;` // cba  
-    * insert(str,pos,len,newstr)  
-    //把str中pos位置开始长度为len的字符串替换为newstr  
-    `select insert('abcdef',2,3,'hhh');` // ahhhef  
-    * substring(str from pos)  
-    //从str中的pos位置开始返回一个新字符串
-    `select substring('abcdef',3);` // cdef  
-    * substring_index(str,delim,count)  
-    //返回str中第count次出现的delim之前的所有字符,如果count为负数,则从右向左  
-    `select substring_index('abacadae','a',3);` // abac  
-    * ltrim(str)  
-    //去除字符串左边的空格  
-    `select ltrim('  abc');`  
-    * rtrim(str)  
-    //去除字符串右边的空格  
-    `select rtrim('abc  ');`  
-    * trim(str)  
-    //去除字符串左右两边的空格  
-    `select trim('   abc   ');`  
-    * mid(str,pos,len)  
-    //从str中的pos位置开始返回len个长度的字符串  
-    `select mid('abcdef',2,3);` // bcd  
-    * lpad(str,len,padstr)  
-    //在str左边填充padstr直到str的长度为len  
-    `select lpad('abc',8,'de');` // dededabc  
-    * rpad(str,len,padstr)  
-    //在str右边填充padstr直到str的长度为len  
-    `select rpad('abc',8,'de');` // abcdeded  
-    * left(str,len)  
-    //返回str左边的len个字符  
-    `select left('abcd',2);` // ab  
-    * right(str,len)  
-    //返回str右边的len个字符  
-    `select right('abcd',2);` // cd  
-    * position(substr in str)  
-    //返回substr在str中第一次出现的位置  
-    `select position('c' in 'abcdc');` // 3  
-    * length(str)  
-    //返回字符串的长度  
-    `select length('abcd');` // 4  
-    * concat(str1,str2,...)  
-    //合并字符串  
-    `select concat('abc','def','gh');` // abcdefgh  
+    > select lcase(name) from 表名;  
+
+    把str中的from_str替换为to_str  
+    > replace(str, from_str, to_str)  
+    > select replace(字段名,替换前的值,替换后的值) from 表名;  
+
+    返回str重复count次的字符串  
+    > repeat(str,count)  
+    > select repeat('abc',2) from 表名; // abcabc  
+
+    逆序字符串  
+    > reverse(str)  
+    > select reverse('abc') from 表名; // cba  
+
+    把str中pos位置开始长度为len的字符串替换为newstr  
+    > insert(str,pos,len,newstr)  
+    > select insert('abcdef',2,3,'hhh'); // ahhhef  
+
+    从str中的pos位置开始返回一个新字符串
+    > substring(str from pos)  
+    > select substring('abcdef',3); // cdef  
+
+    返回str中第count次出现的delim之前的所有字符,如果count为负数,则从右向左  
+    > substring_index(str,delim,count)  
+    > select substring_index('abacadae','a',3); // abac  
+
+    去除字符串左边的空格  
+    > ltrim(str)  
+    > select ltrim('  abc');  
+
+    去除字符串右边的空格  
+    > rtrim(str)  
+    > select rtrim('abc  ');  
+
+    去除字符串左右两边的空格  
+    > trim(str)  
+    > select trim('   abc   ');  
+
+    从str中的pos位置开始返回len个长度的字符串  
+    > mid(str,pos,len)  
+    > select mid('abcdef',2,3); // bcd  
+
+    在str左边填充padstr直到str的长度为len  
+    > lpad(str,len,padstr)  
+    > select lpad('abc',8,'de'); // dededabc  
+
+    在str右边填充padstr直到str的长度为len  
+    > rpad(str,len,padstr)  
+    > select rpad('abc',8,'de'); // abcdeded  
+
+    返回str左边的len个字符  
+    > left(str,len)  
+    > select left('abcd',2); // ab  
+
+    返回str右边的len个字符  
+    > right(str,len)  
+    > select right('abcd',2); // cd  
+
+    返回substr在str中第一次出现的位置  
+    > position(substr in str)  
+    > select position('c' in 'abcdc'); // 3
+
+    返回字符串的长度  
+    > length(str)  
+    > select length('abcd'); // 4
+
+    合并字符串  
+    > concat(str1,str2,...)  
+    > select concat('abc','def','gh'); // abcdefgh  
+    
 17. 日期时间函数  
     * dayofweek(date)  
     //返回date是星期几,1代表星期日,2代表星期一...  
