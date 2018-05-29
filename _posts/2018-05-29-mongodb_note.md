@@ -91,17 +91,17 @@ MongoDB 默认不需要用户授权登录,任何人直接就可以使用,但这�
 > db.集合名.insert({_id:1, key1:value1, key2:value2});  
 > db.集合名.save({_id:1, key1:value1, key2:value2});  
 
-_id 项为默认主键,可以不显示指定  
-当不指定 _id 时,两种方式都为插入新文档  
-当指定 _id 时,如果 _id 的值不存在,刚两种方式都为插入新文档,如果 _id 的值存在,则 insert 方式无效,save 方式为更新已存在的文档  
-也可以同时插入多个文档,以逗号分隔,并且需要用[]括起来  
-> db.集合名.insert([{key1:value1,key2:value2},{key3:value3,key4:value4}]);  
+	_id 项为默认主键,可以不显示指定  
+	当不指定 _id 时,两种方式都为插入新文档  
+	当指定 _id 时,如果 _id 的值不存在,刚两种方式都为插入新文档,如果 _id 的值存在,则 insert 方式无效,save 方式为更新已存在的文档  
+	也可以同时插入多个文档,以逗号分隔,并且需要用[]括起来  
+	> db.集合名.insert([{key1:value1,key2:value2},{key3:value3,key4:value4}]);  
 
 * 查询数据  
 > db.集合名.find(查询条件,筛选条件);  
 > db.集合名.find();  //查询所有数据  
-> db.集合名.find({name:"zhangsan"});` // 相当于 `select * from 集合名 where name = 'zhangsan';  
-> db.集合名.find({name:"zhangsan",age:20});` // 相当于 `select * from 集合名 where name = 'zhangsan' and age = 20;  
+> db.集合名.find({name:"zhangsan"}); // 相当于 select * from 集合名 where name = 'zhangsan';  
+> db.集合名.find({name:"zhangsan",age:20}); // 相当于 select * from 集合名 where name = 'zhangsan' and age = 20;  
 > db.集合名.find({},{name:1,age:1});  // 相当于 select name,age from 集合名;  
 > db.集合名.find({name:"zhangsan"},{name:1,age:1});  // 相当于 select name,age from 集合名 where name = 'zhangsan';  
 > db.集合名.find({$or:[{age:22},{age:20}]});  // 相当于 select * from 集合名 where age=22 or age=20;  
@@ -109,19 +109,18 @@ _id 项为默认主键,可以不显示指定
 * 修改数据  
 > db.集合名.update(criteria,objNew,upsert,multi);  
 
-criteria:查询条件  // 相当于 where 条件  
-objNew:要设置的值  // 相当于 set 字段名=值  
-upsert:如果不存在是否插入新数据,true为插入,默认为false不插入  
-multi:true更新所有符合条件的数据,默认为false只更新第一条  
-> db.集合名.update({name:"zhangsan"},{$set:{age:30}},false,true);  
-
-相当于 update 集合名 set age = 30 where name='zhangsan';  
+	criteria:查询条件  // 相当于 where 条件  
+	objNew:要设置的值  // 相当于 set 字段名=值  
+	upsert:如果不存在是否插入新数据,true为插入,默认为false不插入  
+	multi:true更新所有符合条件的数据,默认为false只更新第一条  
+	> db.集合名.update({name:"zhangsan"},{$set:{age:30}},false,true);  
+	相当于 update 集合名 set age = 30 where name='zhangsan';  
 
 * 删除数据  
 > db.集合名.remove(查询条件,justOne:<boolean>,writeConcern:<document>);  
 
-justOne:为true时只删除一个文档,否则删除所有符合条件的文档  
-writeConcern:抛出异常的级别,默认为writeConcern.NONE  
+	justOne:为true时只删除一个文档,否则删除所有符合条件的文档  
+	writeConcern:抛出异常的级别,默认为writeConcern.NONE  
 > db.集合名.remove({name:"zhangsan"}); // 相当于 delete from 集合名 where name = 'zhangsan';  
 > db.集合名.remove({name:"zhangsan",true,writeConcern.NONE});
 
