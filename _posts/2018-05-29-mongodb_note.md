@@ -19,13 +19,17 @@ MongoDB是一种基于BSON(Binary-JSON)的面向文档的非关系型数据库
 > pgrep mongo -l  
 * 卸载 MongoDB  
 > sudo apt-get --purge remove mongodb mongodb-clients mongodb-server  
+
 ### 文档和集合的概念  
 多个键及其关联的值有序的放在一起就是文档,类似于关系型数据库中的行,文档中不允许有重复的键  
 > {"key1":"value1","key2":"value2"}  
+
 集合就是一组文档,相当于关系型数据库中的表,但是集合是无模式的,不要求文档格式保持一致  
 > {"key1":"value1","key2":"value2"}  
 > {"key3":value}  
+
 以上两个文档放在一起就是一个集合,同时两个文档的键不同,值的类型也不同,但不推荐这样做,最好是保持一个集合中的文档类型格式一致  
+
 ### 数据库常用操作  
 * 显示数据库列表  
 > show dbs;  
