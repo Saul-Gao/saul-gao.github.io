@@ -134,93 +134,111 @@ MongoDB 默认不需要用户授权登录,任何人直接就可以使用,但这�
 
 ### 索引  
 * 普通索引  
-`db.集合名.ensureIndex({key:1});` // key 为要创建索引的字段,1 为指定升序创建索引,降序可以指定为 -1  
+> db.集合名.ensureIndex({key:1}); // key 为要创建索引的字段,1 为指定升序创建索引,降序可以指定为 -1  
 * 唯一索引  
-`db.集合名.ensureIndex({key:1},{unique:true});`  
+> db.集合名.ensureIndex({key:1},{unique:true});  
 * 复合索引  
-`db.集合名.ensureIndex({key1:1,key2:-1});`  
+> db.集合名.ensureIndex({key1:1,key2:-1});  
 * 查看数据库上的所有索引  
-`db.system.indexes.find();`  
+> db.system.indexes.find();  
 * 查看集合上的所有索引  
-`db.集合名.getIndexes();`  
+> db.集合名.getIndexes();  
 * 查看 explain 执行计划  
-`db.集合名.find({age:6}).explain();`  
+> db.集合名.find({age:6}).explain();  
 * 删除集合上的某个索引  
-`db.集合名.dropIndex({key:1});`  
+> db.集合名.dropIndex({key:1});  
 * 删除集合上的所有索引  
-`db.集合名.dropIndexes();`  
-## 7. 聚合  
-`db.集合名.aggregate(AGGREGATE_OPERATION);`  
+> db.集合名.dropIndexes();  
+
+### 聚合  
+> db.集合名.aggregate(AGGREGATE_OPERATION);  
 * count  
-`db.集合名.count();`  // 返回集合中的文档数量  
-`db.集合名.count({"x":1});`  // 返回 x=1 的文档的数量  
+> db.集合名.count();  // 返回集合中的文档数量  
+> db.集合名.count({"x":1});  // 返回 x=1 的文档的数量  
 * distinct  
-`db.runCommand({"distinct":"集合名","key":"键名"});`  
+> db.runCommand({"distinct":"集合名","key":"键名"});  
 * group  
-`db.runCommand({`  
-`"group":{`  
-`"ns":"集合名",`
-`"key":"分组键",`  
-`"initial":{"计数器":0},`  
-`"$reduce":function(doc,prev){if (doc.age > prev.age) {prev.age = doc.age;}},`  
-`"condition":{"键":"值"}`  
-`}});`  
-`db.haha.aggregate([{$group:{_id:{name:'$name'},max:{$max:'$age'}}}]);`
-## 8. 复制  
+> db.runCommand({  
+> "group":{  
+> "ns":"集合名",
+> "key":"分组键",  
+> "initial":{"计数器":0},  
+> "$reduce":function(doc,prev){if (doc.age > prev.age) {prev.age = doc.age;}},  
+> "condition":{"键":"值"}  
+> }});  
+> db.haha.aggregate([{$group:{_id:{name:'$name'},max:{$max:'$age'}}}]); 
+
+### 复制  
 * 主从复制  
 一主一从或一主多从，为了保证效率，一般从节点不超过12个,主要用于数据备份,数据恢复,读写分离  
     1. 创建主节点  
-    `mkdir -p ~/dbs/master`  
-    `./mongod --dbpath ~/dbs/master --port 10000 --master`  
+    > mkdir -p ~/dbs/master  
+    > ./mongod --dbpath ~/dbs/master --port 10000 --master  
+
     2. 创建从节点  
-    `mkdir -p ~/dbs/slave`  
-    `./mongod --dbpath ~/dbs/slave --port 10001 --slave --source localhost:10000`  
+    > mkdir -p ~/dbs/slave  
+    > ./mongod --dbpath ~/dbs/slave --port 10001 --slave --source localhost:10000  
+
     3. 假设主节点绑定了 localhost:27017,启动从节点时可以不添加源,而是随后向 sources 集合添加主节点信息:   
-    `./mongod --slave --dbpath ~/dbs/slave --port 27018`  
-    `use local`  
-    `db.sources.insert({"host":"localhost:27017"});`  
+    > ./mongod --slave --dbpath ~/dbs/slave --port 27018  
+    > use local  
+    > db.sources.insert({"host":"localhost:27017"});  
+
 * 副本集  
 多个节点的集群,拥有一个仲裁节点,一个主节点,多个从节点,当主节点故障时仲裁节点会把从节点变成主节点  
     1. 创建三个服务器目录  
-    `mkdir ./dbs/node1`  
-    `mkdir ./dbs/node2`  
-    `mkdir ./dbs/arbiter`  
+    > mkdir ./dbs/node1  
+    > mkdir ./dbs/node2  
+    > mkdir ./dbs/arbiter  
+
     2. 开启三个服务器放在一个副本集中  
-    `nohup mongod --replSet 副本集名称 --dbpath ./dbs/node1 --port 9927 --oplogSize 1024 &`  
-    `nohup mongod --replSet 副本集名称 --dbpath ./dbs/node2 --port 9928 --oplogSize 1024 &`  
-    `nohup mongod --replSet 副本集名称 --dbpath ./dbs/arbiter --port 9929 --oplogSize 1024 &`  
+    > nohup mongod --replSet 副本集名称 --dbpath ./dbs/node1 --port 9927 --oplogSize 1024 &  
+    > nohup mongod --replSet 副本集名称 --dbpath ./dbs/node2 --port 9928 --oplogSize 1024 &  
+    > nohup mongod --replSet 副本集名称 --dbpath ./dbs/arbiter --port 9929 --oplogSize 1024 &  
+
     3. 分别登录三个服务器  
-    `mongo localhost:端口号`  
+    > mongo localhost:端口号  
+
     4. 声明配置表  
-    `config = {_id:"副本集名称",members:[]}`  
+    > config = {_id:"副本集名称",members:[]}  
+
     5. 向配置表中添加成员  
-    `config.members.push({_id:0,host:"localhost:9927"});`  
-     `config.members.push({_id:0,host:"localhost:9928"});`  
-      `config.members.push({_id:0,host:"localhost:9929",arbiterOnly:true});`  
+    > config.members.push({_id:0,host:"localhost:9927"});  
+    > config.members.push({_id:0,host:"localhost:9928"});  
+    > config.members.push({_id:0,host:"localhost:9929",arbiterOnly:true});  
+
     6. 初始化配置表  
-    `rs.initiate(config);`  
+    > rs.initiate(config);  
+
     7. 插入数据测试  
         - 在主节点插入数据  
-        `db.haha.insert({name:"haha",age:20});`  
+        > db.haha.insert({name:"haha",age:20});  
         - 在从节点查看数据  
-        `db.haha.find();`  
-        `报错解决:rs.slaveOK();`  
+        > db.haha.find();  
+        > 报错解决:rs.slaveOK();  
         - 仲裁节点不能操作数据
+
     8. 故障测试  
     把主节点 kill 掉,从节点会变成主节点  
-## 9. 分片  
+
+### 分片  
 * 启动配置服务器  
-`mkdir -p ./dbs/config`  
-`mongod --dbpath ./dbs/config --port 20000`  
+> mkdir -p ./dbs/config  
+> mongod --dbpath ./dbs/config --port 20000  
+
 * 启动 mongos 进程  
-`mongos --port 30000 --configdb localhost:20000`  
+> mongos --port 30000 --configdb localhost:20000  
+
 * 添加片(普通服务器或副本集)  
-`mkdir -p ./dbs/shard1`  
-`mongod --dbpath ./dbs/shard1 --port 10000`  
+> mkdir -p ./dbs/shard1  
+> mongod --dbpath ./dbs/shard1 --port 10000  
+
 * 连接 mongos 把片加入集群  
-`mongo localhost:30000/admin`  
-`db.runCommand({addshard:"localhost:10000",allowLocal:true});`  
+> mongo localhost:30000/admin  
+> db.runCommand({addshard:"localhost:10000",allowLocal:true});  
+
 * 开启数据库的分片功能  
-`db.runCommand({"enablesharding":"数据库名"});`  
+> db.runCommand({"enablesharding":"数据库名"});  
+
 * 根据片键对集合分片  
-`db.runCommand({"shardcollection":"数据库.集合名","key":{"_id":1}});`
+> db.runCommand({"shardcollection":"数据库.集合名","key":{"_id":1}});
