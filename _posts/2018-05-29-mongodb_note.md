@@ -12,54 +12,53 @@ MongoDB是一种基于BSON(Binary-JSON)的面向文档的非关系型数据库
 * 查看版本号  
 > mongo -version  
 * 启动和关闭 MongoDB 服务  
-`service mongodb start`  
-`service mongodb stop`  
+> service mongodb start  
+> service mongodb stop  
 * 查看 MongoDB 服务是否启动成功  
-`service mongodb status`  
-`pgrep mongo -l`  
+> service mongodb status  
+> pgrep mongo -l  
 * 卸载 MongoDB  
-`sudo apt-get --purge remove mongodb mongodb-clients mongodb-server`
-## 2. 文档的概念  
+> sudo apt-get --purge remove mongodb mongodb-clients mongodb-server  
+### 文档和集合的概念  
 多个键及其关联的值有序的放在一起就是文档,类似于关系型数据库中的行,文档中不允许有重复的键  
-`{"key1":"value1","key2":"value2"}`  
-## 3. 集合的概念  
+> {"key1":"value1","key2":"value2"}  
 集合就是一组文档,相当于关系型数据库中的表,但是集合是无模式的,不要求文档格式保持一致  
-`{"key1":"value1","key2":"value2"}`  
-`{"key3":value}`  
+> {"key1":"value1","key2":"value2"}  
+> {"key3":value}  
 以上两个文档放在一起就是一个集合,同时两个文档的键不同,值的类型也不同,但不推荐这样做,最好是保持一个集合中的文档类型格式一致  
-## 4. 数据库常用操作  
+### 数据库常用操作  
 * 显示数据库列表  
-`show dbs;`  
+> show dbs;  
 * 显示当前数据库中的集合  
-`show collections;`  
+> show collections;  
 * 显示所有用户  
-`show users;`  
+> show users;  
 * 查看当前使用的数据库  
-`db;`
+> db;
 * 切换当前数据库  
-`use 数据库名;`  
+> use 数据库名;  
 * 显示数据库操作命令  
-`db.help();`  
+> db.help();  
 * 显示集合操作命令  
-`db.集合名.help();`  
+> db.集合名.help();  
 * 创建数据库  
 MongoDB 中没有直接创建数据库的命令,如果想创建一个数据库,可以先切换到该数据库执行一些操作,数据库将会被自动创建   
 * 删除数据库  
-`use 数据库名;`  
-`db.dropDatabase();`  
+> use 数据库名;  
+> db.dropDatabase();  
 * 创建集合  
-`db.createCollection('集合名');`  
+> db.createCollection('集合名');  
 也可以不预先创建集合,直接使用一个不存在的集合,插入数据时会自动创建  
 * 删除集合  
-`db.集合名.drop();`  
+> db.集合名.drop();  
 * 创建用户  
-`db.createUser({user:"用户名",pwd:"密码",roles:[{role:"readWrite",db:"数据库名"}]});`    
-`use 数据库名;`  
-`db.addUser('用户名','密码');` //此方式被废弃,虽仍然可用,但不建议使用  
+> db.createUser({user:"用户名",pwd:"密码",roles:[{role:"readWrite",db:"数据库名"}]});    
+> use 数据库名;  
+> db.addUser('用户名','密码'); //此方式被废弃,虽仍然可用,但不建议使用  
 * 认证用户  
-`db.auth('用户名','密码');`
+> db.auth('用户名','密码');
 * 删除用户  
-`db.dropUser("用户名");`  
+> db.dropUser("用户名");  
 * 权限管理  
 MongoDB 默认不需要用户授权登录,任何人直接就可以使用,但这样不安全,所以需要开启权限管理  
 步骤如下:  
