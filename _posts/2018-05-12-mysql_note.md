@@ -2,7 +2,7 @@
 layout: post
 title: MySQL 数据库的基础命令整理 
 date: 2018-05-12
-tags: [MySQL]
+tags: [MySQL, 数据库]
 ---
 
 本文主要介绍 MySQL 数据库的安装、服务配置和一些常用的操作命令，系统环境为 Ubuntu 18.04  

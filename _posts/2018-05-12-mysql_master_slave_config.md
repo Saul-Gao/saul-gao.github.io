@@ -2,7 +2,7 @@
 layout: post
 title: MySQL 主从配置
 date: 2018-05-12
-tags: [MySQL]
+tags: [MySQL, 数据库]
 ---
 
 ### 主服务器配置
