@@ -152,11 +152,14 @@ MongoDB 默认不需要用户授权登录,任何人直接就可以使用,但这�
 
 ### 聚合  
 > db.集合名.aggregate(AGGREGATE_OPERATION);  
+
 * count  
 > db.集合名.count();  // 返回集合中的文档数量  
 > db.集合名.count({"x":1});  // 返回 x=1 的文档的数量  
+
 * distinct  
 > db.runCommand({"distinct":"集合名","key":"键名"});  
+
 * group  
 > db.runCommand({  
 > "group":{  
