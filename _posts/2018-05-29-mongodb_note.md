@@ -5,13 +5,12 @@ date: 2018-05-29
 tags: [MongoDB, 数据库]  
 ---  
 
-# MongoDB 数据库  
-## 1. 简介及安装  
-非关系型数据库,面向文档  
+### 简介及安装  
+MongoDB是一种基于BSON(Binary-JSON)的面向文档的非关系型数据库  
 * 安装 MongoDB  
-`sudo apt-get install mongodb`  
+> sudo apt-get install mongodb  
 * 查看版本号  
-`mongo -version`  
+> mongo -version  
 * 启动和关闭 MongoDB 服务  
 `service mongodb start`  
 `service mongodb stop`  
