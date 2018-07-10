@@ -512,6 +512,9 @@ tags: [MySQL, 数据库]
 
 * 唯一键约束  
 > create table 表名(字段名 字段类型 unique,字段名 字段类型,...);  
+  
+* 删除唯一键约束  
+> alter table drop index 字段名;  
 
 * 外键约束  
 > create table 表1(字段名 字段类型,字段名 字段类型 references 表2(字段名),...);  
