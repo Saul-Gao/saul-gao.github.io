@@ -1,0 +1,39 @@
+---  
+layout: post  
+title: Ubuntu 18.04 安装 PyCharm 并设置快捷方式到任务栏  
+date: 2018-08-16  
+tags: [Python]  
+---  
+  
+### 安装 PyCharm  
+1. 使用 snap 安装，执行如下命令(版本3选1):  
+> sudo snap install <pycharm-professional, pycharm-community, or pycharm-educational> --classic  
+然后在终端中运行 pycharm-professional, pycharm-community, 或者 pycharm-educational  
+2. 使用 tar 包安装:  
+``` bash   
+# 解压 tar 包到指定目录，推荐目录为 /opt/，不指定 -C 默认解压到当前目录下  
+tar xfz pycharm-*.tar.gz -C <new_archive_folder>  
+# 进入到解压后的 bin 目录中 
+cd <new_archive_folder>/pycharm-*/bin  
+# 运行 pycharm 的安装脚本  
+./pycharm.sh  
+# 然后是图形化操作，基本上一路下一步就可以了
+```  
+  
+### 设置 PyCharm 快捷方式  
+安装完成后没有启动 PyCharm 的快捷方式，需要手动添加一个，Ubuntu 的所有快捷方式都放在 /usr/share/applications 目录中，
+所以我们在这个目录中创建一个名为 pycharm.desktop 的文件，在里面添加上如下内容:  
+``` bash  
+[Desktop Entry]  
+Type=Application  
+Name=Pycharm  
+GenericName=Pycharm3  
+Comment=Pycharm3:The Python IDE  
+Exec="/opt/pycharm-community-2018.2.1/bin/pycharm.sh" %f  
+Icon=/opt/pycharm-community-2018.2.1/bin/pycharm.png  
+Terminal=pycharm  
+Categories=Pycharm;  
+```  
+因为我是安装在 /opt/ 目录下的，如果安装在其他目录，需要修改 Exec 和 Icon 两项中的路径，保存之后修改文件的可执行权限:  
+> sudo chmod +x /usr/share/applications/pycharm.desktop  
+现在在 Ubuntu 的应用菜单界面可以看到 PyCharm 的图标了，右键添加到任务栏即可
