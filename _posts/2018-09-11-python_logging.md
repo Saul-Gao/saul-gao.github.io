@@ -16,4 +16,9 @@ Python 的日志系统由四大基本组件构成，包括:
 
 ### Logging 两种配置使用方式  
 * 在代码中直接配置使用  
+``` Python  
+# 首先导入 logging 包
+import logging  
+```  
+
 * 使用配置文件
