@@ -105,3 +105,5 @@ format='asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - p
 在其他模块中调用时获取qualname属性指定名字的记录器，然后直接使用即可  
 > logger = logging.getLogger('test1')  
 > logger.debug('test1')  
+  
+Python 内置的日志系统配合filebeat + elasticsearch + kibana搭建完善的可视化日志系统效果更好，也许以后会作记录，这里不再赘述
