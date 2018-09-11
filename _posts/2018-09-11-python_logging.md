@@ -93,7 +93,8 @@ args=('../log/test1.log', 'a', 1024*1024, 5)
 class=handlers.RotatingFileHandler
 formatter=all
 args=('../log/test2.log', 'a', 1024*1024, 5)
-
+```  
+``` python
 # 配置所有的格式器，指定具体格式
 [formatter_all]
 format='asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - process: %(process)d - \n message: %(message)s'  
