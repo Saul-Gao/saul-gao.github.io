@@ -17,8 +17,23 @@ Python 的日志系统由四大基本组件构成，包括:
 ### Logging 两种配置使用方式  
 * 在代码中直接配置使用  
 ``` Python  
-# 首先导入 logging 包
+# 导入 logging 包
 import logging  
+# 生成并获取记录器，使用相同名字多次获取的是同一个记录器，此处建议使用当前模块名称__name__  
+logger = logging.getLogger('test')  
+# 定义日志文件名称  
+LOGFILE = 'test.log'
+handler = logging.handlers.RotatingFileHandler(filename=LOGFILE, maxBytes=10*1024*1024, backupCount=5)
+
+fmt = 'asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - process: %(process)d - ' \
+      '\n message: %(message)s'
+formatter = logging.Formatter(fmt)
+
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
+
 ```  
 
 * 使用配置文件
