@@ -16,7 +16,7 @@ Python 的日志系统由四大基本组件构成，包括:
 
 ### Logging 两种配置使用方式  
 * 在代码中直接配置使用  
-``` Python
+```Python
 # 导入 logging 包
 import logging  
 import logging.handlers
@@ -50,7 +50,7 @@ logger.critical('test critical')
 
 * 使用配置文件  
 如果一个项目拥有多个模块，并且每个模块都需要一个单独的日志文件，那么上面的第一种方式可能需要在每个模块中都去定义一遍，这样比较麻烦，此时，可以使用自定义配置文件的方式去定义，如下(logger.conf):  
-``` Python  
+```Python
 # 声明所有的记录器，root是系统默认的必须有，其他的自定义  
 [loggers]
 keys=root,testLogger1,testLogger2
