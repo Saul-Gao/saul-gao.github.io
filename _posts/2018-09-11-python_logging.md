@@ -107,3 +107,4 @@ format='asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - p
 > logger.debug('test1')  
   
 Python 内置的日志系统配合filebeat + elasticsearch + kibana搭建完善的可视化日志系统效果更好，也许以后会作记录，这里不再赘述
+被抛弃啦啦啦
