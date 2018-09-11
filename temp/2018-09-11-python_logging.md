@@ -48,4 +48,60 @@ logger.error('test error')
 logger.critical('test critical')
 ```  
 
-* 使用配置文件
+* 使用配置文件  
+如果一个项目拥有多个模块，并且每个模块都需要一个单独的日志文件，那么上面的第一种方式可能需要在每个模块中都去定义一遍，这样比较麻烦，此时，可以使用自定义配置文件的方式去定义，如下(logger.conf):  
+``` conf  
+# 声明所有的记录器，root是系统默认的必须有，其他的自定义  
+[loggers]
+keys=root,testLogger1,testLogger2
+
+# 声明所有的处理器, 全部自定义
+[handlers]
+keys=rootHandler,testHandler1,testHandler2
+
+# 声明所有的格式器，全部自定义，因为我所有的日志格式都相同，所以这里只声明了一个，起名为all
+[formatters]
+keys=all
+
+# 配置所有的记录器，指定消息级别和所使用的处理器，qualname属性为使用记录器时的真实名字  
+[logger_root]
+level=NOTSET
+handlers=rootHandler
+
+[logger_testLogger1]
+level=DEBUG
+handlers=testHandler1
+qualname=test1
+
+[logger_testLogger2]
+level=DEBUG
+handlers=testHandler2
+qualname=test2
+
+# 配置所有的处理器，指定处理器类型、参数和所使用的格式器  
+[handler_rootHandler]
+class=handlers.RotatingFileHandler
+formatter=all
+args=('/dev/null', 'a', 1024*1024, 5)
+
+[handler_testHandler1]
+class=handlers.RotatingFileHandler
+formatter=all
+args=('../log/test1.log', 'a', 1024*1024, 5)
+
+[handler_testHandler2]
+class=handlers.RotatingFileHandler
+formatter=all
+args=('../log/test2.log', 'a', 1024*1024, 5)
+
+# 配置所有的格式器，指定具体格式
+[formatter_all]
+format='asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - process: %(process)d - \n message: %(message)s'
+```  
+  
+在程序启动时使用配置文件初始化logging  
+> logging.config.fileConfig('logger.conf')  
+  
+在其他模块中调用时获取qualname属性指定名字的记录器，然后直接使用即可  
+> logger = logging.getLogger('test1')  
+> logger.debug('test1')  
