@@ -19,21 +19,33 @@ Python 的日志系统由四大基本组件构成，包括:
 ``` Python  
 # 导入 logging 包
 import logging  
-# 生成并获取记录器，使用相同名字多次获取的是同一个记录器，此处建议使用当前模块名称__name__  
+import logging.handlers
+# 生成并获取记录器，所有记录器默认继承于root记录器，使用相同名字多次获取的是同一个记录器，此处建议使用当前模块名称__name__  
 logger = logging.getLogger('test')  
 # 定义日志文件名称  
-LOGFILE = 'test.log'
-handler = logging.handlers.RotatingFileHandler(filename=LOGFILE, maxBytes=10*1024*1024, backupCount=5)
-
-fmt = 'asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - process: %(process)d - ' \
-      '\n message: %(message)s'
-formatter = logging.Formatter(fmt)
-
-handler.setFormatter(formatter)
-
-logger.addHandler(handler)
+LOGFILE = 'test.log'  
+# 定义处理器，处理器有多种类型，请自行查询  
+handler = logging.handlers.RotatingFileHandler(filename=LOGFILE, maxBytes=10*1024*1024, backupCount=5)  
+# 定义消息格式，格式中有一些内置属性，请自行查询
+fmt = 'asctime: %(asctime)s - levelname: %(levelname)s - lineno: %(lineno)d - process: %(process)d - \n message: %(message)s'  
+# 定义格式器  
+formatter = logging.Formatter(fmt)  
+# 把格式器安装到处理器上  
+handler.setFormatter(formatter)  
+# 把处理器安装到记录器上  
+logger.addHandler(handler)  
+# 设置记录器的消息级别，共有6个级别: notset、debug、info、warning、error、critical，只有消息级别高于记录器级别时才会被处理，notset只有root记录器才可以设置
 logger.setLevel(logging.DEBUG)
-未完待续
+# 打印debug日志
+logger.debug('test debug')
+# 打印info日志
+logger.info('test info')
+# 打印warning日志
+logger.warning('test warning')
+# 打印error日志
+logger.error('test error')
+# 打印critical日志
+logger.critical('test critical')
 ```  
 
 * 使用配置文件
