@@ -62,7 +62,7 @@ keys=rootHandler,testHandler1,testHandler2
 # 声明所有的格式器，全部自定义，因为我所有的日志格式都相同，所以这里只声明了一个，起名为all
 [formatters]
 keys=all
-
+```
 # 配置所有的记录器，指定消息级别和所使用的处理器，qualname属性为使用记录器时的真实名字  
 [logger_root]
 level=NOTSET
